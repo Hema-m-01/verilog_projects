@@ -1,4 +1,5 @@
-module sd1010_moore_nonovlap(input clk,reset,d,output reg q);
+module sd1010_moore_ovlap( input clk,reset,d,output reg q);
+									
 parameter init=3'd0,got1=3'd1,got10=3'd2,got101=3'd3,got1010=3'd4;
 reg [2:0] c_s,n_s;
 
@@ -39,15 +40,14 @@ got101:begin
 got1010:begin
 	q<=1;
 	if(d)
-		n_s<=got1;
+		n_s<=got101;
 	else
 		n_s<=init;
 	end	
 default:begin
 n_s<=init;
-q<=0;
+q<=1'b0;
 end
 endcase
 end
-
 endmodule
